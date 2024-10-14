@@ -1,36 +1,37 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
-/**
- * Write a description of class Bullet here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Bullet extends Actor
 {
     private int speed = 5;
-    private int x, y;
     private int targetX, targetY;
 
-    public Bullet(int x, int y, int targetX, int targetY) {
-        super();
+    public Bullet(int targetX, int targetY) {
         this.targetX = targetX;
         this.targetY = targetY;
-        pointTowardsTarget();       
     }
 
-    private void pointTowardsTarget() {
-        double angle = Math.atan2(targetY - y, targetX - x);
-        setRotation((int) Math.toDegrees(angle));
+    @Override
+    protected void addedToWorld(World world) {
+        super.addedToWorld(world);
+        turnTowards(targetX, targetY);
     }
-    
-    /**
-     * Act - do whatever the Bullet wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
     public void act()
     {
-        // Add your action code here.
         move(speed);
+        
+        // Check if the bullet has reached the edge of the world
+        if (isAtEdge()) {
+            getWorld().removeObject(this);
+            return; // Exit the act method early since the bullet is removed
+        }
+        
+        // Check for collision with an Agent
+        Agent hitAgent = (Agent) getOneIntersectingObject(Agent.class);
+        if (hitAgent != null) {
+            hitAgent.takeDamage(1); // Assume each bullet does 1 damage
+            getWorld().removeObject(this);
+            // Optionally, update score or trigger other events
+        }
     }
 }

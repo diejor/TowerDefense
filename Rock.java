@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Rock extends Bullet
 {
-    public Rock(int x, int y, int targetX, int targetY) {
-        super(x, y, targetX, targetY);
+    public Rock(int targetX, int targetY) {
+        super(targetX, targetY);
     }
 
     /**

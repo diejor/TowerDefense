@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=HUD
+comment0.text=\n\ HUD\ displays\ the\ player's\ score\ and\ remaining\ lives.\n
+comment1.params=initialLives
+comment1.target=HUD(int)
+comment2.params=points
+comment2.target=void\ addScore(int)
+comment3.params=count
+comment3.target=void\ loseLife(int)
+comment4.params=
+comment4.target=void\ updateImage()
+numComments=5

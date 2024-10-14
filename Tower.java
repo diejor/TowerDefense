@@ -1,27 +1,47 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class Tower here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Tower extends Actor
 {
-    /**
-     * Act - do whatever the Tower wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+    private int shootingCooldown = 50; // Adjust this to change the shooting speed
+    private int cooldownTimer = 1;
+
+    public void act() {
         shootAgents();
+        cooldownTimer++;
+    
+        // For debugging: draw a line to the target
+        //Agent target = getClosestAgent();
+        //if (target != null) {
+        //    GreenfootImage bg = getWorld().getBackground();
+        //    bg.setColor(Color.RED); // Choose a color that stands out
+        //    bg.drawLine(getX(), getY(), target.getX(), target.getY());
+        //}
     }
 
     private void shootAgents() {
-        for (Agent agent : getObjectsInRange(100, Agent.class)) {
-            Rock bullet = new Rock(getX(), getY(), agent.getX(), agent.getY());
-            getWorld().addObject(bullet, getX(), getY());
+        if (cooldownTimer >= shootingCooldown) {
+            Agent target = getClosestAgent();
+            if (target != null) {
+                Rock bullet = new Rock(target.getX(), target.getY());
+                getWorld().addObject(bullet, getX(), getY());
+                cooldownTimer = 0; // Reset cooldown timer
+            }
         }
+    }
+
+    private Agent getClosestAgent() {
+        Agent closestAgent = null;
+        double closestDistance = Double.MAX_VALUE;
+
+        for (Agent agent : getObjectsInRange(1000, Agent.class)) {
+            double distance = Math.hypot(agent.getX() - getX(), agent.getY() - getY());
+            if (distance < closestDistance) {
+                closestAgent = agent;
+                closestDistance = distance;
+            }
+        }
+
+        return closestAgent;
     }
 }

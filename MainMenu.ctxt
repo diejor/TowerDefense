@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=MainMenu
+comment0.text=\n\ MainMenu\ is\ the\ initial\ World\ that\ displays\ the\ game\ title\ and\ options\ to\ start\ the\ game.\n
+comment1.params=
+comment1.target=MainMenu()
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ MainMenu.\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\n\ Act\ method\ to\ handle\ user\ interactions.\n
+numComments=3

@@ -1,36 +1,42 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
-/**
- * Write a description of class Agent here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Agent extends Actor
 {
-    private int SPEED = 3;
+    private int speed = 1;
+    private int health = 3; // Example health value
     
-    /**
-     * Act - do whatever the Agent wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    public Agent() {
+
+    }
+
     public void act()
     {
-        processMovement();
+        move(speed);
+        // Add more behaviors like pathfinding, attacking, etc.
+        
+        // Example: Remove agent if it reaches the edge
+        if (isAtEdge()) {
+            getWorld().removeObject(this);
+            // Optionally, deduct player's life or other penalties
+            if (getWorld() instanceof FirstLevel) {
+                HUD hud = (HUD) getWorld().getObjects(HUD.class).get(0);
+                hud.loseLife(1);
+            }
+        }
     }
     
-    private void processMovement() {
-        int x = getX();
-        int y = getY();
-    
-        if (Greenfoot.isKeyDown("a")) {
-            setLocation(x - SPEED, y);
-        } if (Greenfoot.isKeyDown("w")) {
-            setLocation(x, y - SPEED);
-        } if (Greenfoot.isKeyDown("d")) {
-            setLocation(x + SPEED, y);
-        } if (Greenfoot.isKeyDown("s")) {
-            setLocation(x, y + SPEED);
+    /**
+     * Reduces the agent's health when hit by a bullet.
+     */
+    public void takeDamage(int damage) {
+        health -= damage;
+        if (health <= 0) {
+            getWorld().removeObject(this);
+            // Optionally, increase player's score
+            if (getWorld() instanceof FirstLevel) {
+                HUD hud = (HUD) getWorld().getObjects(HUD.class).get(0);
+                hud.addScore(10); // Example: Add 10 points per agent killed
+            }
         }
     }
 }

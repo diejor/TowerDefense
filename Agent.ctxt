@@ -1,9 +1,10 @@
 #BlueJ class context
 comment0.target=Agent
-comment0.text=\n\ Write\ a\ description\ of\ class\ Agent\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=
-comment1.target=void\ act()
-comment1.text=\n\ Act\ -\ do\ whatever\ the\ Agent\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
+comment1.target=Agent()
 comment2.params=
-comment2.target=void\ processMovement()
-numComments=3
+comment2.target=void\ act()
+comment3.params=damage
+comment3.target=void\ takeDamage(int)
+comment3.text=\n\ Reduces\ the\ agent's\ health\ when\ hit\ by\ a\ bullet.\n
+numComments=4
